@@ -15,6 +15,7 @@ on a Linux terminall run :
   docker-compose up
 
 ## Access the App
+on a browser access the url "localhost"
 
 ## Destroy the environment
 on a Linux terminall run :

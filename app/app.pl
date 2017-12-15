@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/local/bin/perl
 use strict;
 use warnings;
 use v5.10; # for say() function
@@ -11,6 +11,14 @@ my $db="employees";
 my $host="172.17.0.1";
 my $username = "root";
 my $password = 'password';
+
+print "Content-type:text/html\n\n";
+print <<EndOfHTML;
+<html><head><title>Perceptyx</title></head>
+<body>
+<h1>Perceptyxs</h1>
+EndOfHTML
+
 
 # connect to MySQL database
 my %attr = ( PrintError=>0,  # turn off error reporting via warn()
@@ -37,6 +45,14 @@ sub query_employees{
   my $sql = "SELECT * FROM employees WHERE gender = 'M' AND birth_date = '1965-02-01 ' and hire_date > '1990-01-01' ORDER BY first_name,last_name";
   my $sth = $dbh->prepare($sql);
   $sth->execute();
-  $sth->dump_results( );
-  $sth->finish();
+
+#  $sth->dump_results( );
+
+  while ( my @row = $sth->fetchrow_array ) {
+    print " @row <BR>\n";
+  }
+
+ $sth->finish();
 }
+
+print "</body></html>";

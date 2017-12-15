@@ -9,3 +9,7 @@ services:
     environment:
       - MYSQL_DATABASE=employees
       - MYSQL_ROOT_PASSWORD=password
+  web:
+    build: ./app/
+    ports:
+     - "80:80"
