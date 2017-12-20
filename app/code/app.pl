@@ -8,7 +8,7 @@ use DBI;
 # MySQL database configurations
 #my $dsn = "DBI:mysql:employees";
 my $db="employees";
-my $host="172.17.0.1";
+my $host="mysql";
 my $username = "root";
 my $password = 'password';
 
