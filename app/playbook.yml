@@ -1,0 +1,39 @@
+---
+- hosts: localhost
+  sudo: True
+  connection: local
+
+  roles:
+    - perl
+    - cpanm
+    - dbd-perl
+    - nginx-fastcgi
+    - role: jdauphant.nginx
+      nginx_sites:
+        default :
+          - listen 80
+          - server_name example.com www.example.com
+          - root /var/www/example.com
+          - access_log /var/log/nginx/example.com.access.log
+
+          - location / { index  index.html index.htm index.pl; }
+          - |
+            location ~ \.pl|cgi$ {
+              try_files $uri =404;
+              gzip off;
+              fastcgi_pass  127.0.0.1:8999;
+              fastcgi_index index.pl;
+              fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+              include fastcgi_params;
+            }
+
+  tasks:
+    - file:
+        path: /var/www/example.com/
+        state: directory
+        mode: 0755
+
+    - copy:
+        src: /app/code/app.pl
+        dest: /var/www/example.com/index.pl
+        mode: 0755

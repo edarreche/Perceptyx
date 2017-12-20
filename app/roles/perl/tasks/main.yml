@@ -1,0 +1,8 @@
+---
+# Install and configure perl.
+
+- name: install perl
+  apt: name={{ item }}
+       state=present
+  with_items:
+    - perl

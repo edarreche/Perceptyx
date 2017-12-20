@@ -1,9 +1,11 @@
 #!/bin/bash
 
-echo "Starting NGINX"
-/etc/init.d/nginx start
-echo "Started NGINX"
-echo "Starting FCGI"
+
+ansible-galaxy install jdauphant.nginx
+ansible-playbook playbook.yml -vv
+
 /etc/init.d/perl-fcgi start
-echo "Started FCGI"
- while :; do sleep 1; done
+
+nginx -g "daemon off;"
+
+#while :; do sleep 1; done

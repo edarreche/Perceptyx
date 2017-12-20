@@ -1,0 +1,33 @@
+- name: install nginx and fastcgi
+  apt: name={{ item }}
+       state=present
+  with_items:
+    - nginx
+    - libfcgi-perl
+
+- name: Download
+  get_url:
+    url: http://nginxlibrary.com/downloads/perl-fcgi/fastcgi-wrapper
+    dest: /usr/bin/fastcgi-wrapper.pl
+    mode: 0755
+    # wget http://nginxlibrary.com/downloads/perl-fcgi/fastcgi-wrapper -O /usr/bin/fastcgi-wrapper.pl
+    # chmod +x /usr/bin/fastcgi-wrapper.pl
+
+- name: Download
+  get_url:
+    url: http://nginxlibrary.com/downloads/perl-fcgi/perl-fcgi
+    dest: /etc/init.d/perl-fcgi
+    mode: 0760
+    # wget http://nginxlibrary.com/downloads/perl-fcgi/perl-fcgi -O /etc/init.d/perl-fcgi
+    # chmod +x /etc/init.d/perl-fcgi
+
+- name: usermod
+  user:
+    name : www-data
+    shell : /bin/bash
+# usermod -s /bin/bash www-data
+# update-rc.d perl-fcgi defaults
+# insserv perl-fcgi
+#
+# cp app.pl /var/www/example.com/index.pl
+# chmod a+x /var/www/example.com/index.pl

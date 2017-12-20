@@ -1,0 +1,10 @@
+---
+- name: install required lib
+  apt: name=libmysqlclient-dev
+       state=present
+
+- name: install implicit  DBD::mysql dependencies
+  cpanm: name={{ item }}
+  with_items:
+    - DBI
+    - DBD::mysql

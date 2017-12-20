@@ -13,3 +13,5 @@ services:
     build: ./app/
     ports:
      - "80:80"
+    volumes:
+     - "./app/:/app/"
