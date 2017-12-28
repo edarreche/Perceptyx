@@ -20,7 +20,7 @@ sudo docker-compose --version
 ## Checkout the project
 On a Linux terminall run :
 ```
-git clone git@github.com:edarreche/Perceptyx.git
+git clone https://github.com/edarreche/Perceptyx.git
 ```
 
 then step into the Project :
